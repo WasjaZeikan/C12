@@ -1,6 +1,28 @@
 #include "ft_list.h"
 
-void ft_list_sort(t_list **begin_list, int (*cmp)())
+void	ft_list_sort(t_list **begin_list, int (*cmp)())
 {
-	
+	t_list	*cur;
+	int		swapped;
+	void	*tmp;
+
+	if (begin_list == NULL || *begin_list == NULL)
+		return ;
+	swapped = 1;
+	while (swapped)
+	{
+		swapped = 0;
+		cur = *begin_list;
+		while (cur->next)
+		{
+			if (cmp(cur->data, cur->next->data) > 0)
+			{
+				tmp = cur->data;
+				cur->data = cur->next->data;
+				cur->next->data = tmp;
+				swapped = 1;
+			}
+			cur = cur->next;
+		}
+	}
 }
